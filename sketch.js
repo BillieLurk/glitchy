@@ -9,7 +9,7 @@ function preload(){
   simpleShader = loadShader('basic.vert', 'basic.frag');
   
   // Load the image
-  img0 = loadImage("sand.png");
+  img0 = loadImage("ice.png");
   img1 = loadImage("ripples_blur.jpg");
   img2 = loadImage("boosygoosy.png");
   
@@ -18,7 +18,7 @@ function preload(){
 function setup() {
   // shaders require WEBGL mode to work
   createCanvas(500, 500, WEBGL);
-  //img1.blend(img2, 0, 0, img1.width, img1.height, 0, 0, img1.width, img2.height/6, DARKEST);
+  img1.blend(img2, 0, 0, img1.width, img1.height, 0, 0, img1.width, img2.height/6, DIFFERENCE  );
 }
 
 function draw() {  
@@ -32,7 +32,7 @@ function draw() {
   // Send the image to the shader
   simpleShader.setUniform("uTexture0", img0);
   simpleShader.setUniform("uTexture1", img1);
-  simpleShader.setUniform("uScale", [mx, my]);
+  simpleShader.setUniform("uScale", [mx+ cos(frameCount/100)/20, my+ sin(frameCount/300)/40]);
 
   // rect gives us some geometry on the screen
   rect(0,0,width, height);
